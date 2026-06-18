@@ -69,7 +69,7 @@ function openRecipe(id) {
         <h2 style="margin: 15px 0; color: var(--primary);">${r.title}</h2>
         <div class="modal-grid">
             <div>
-                <h4 style="margin-bottom:10px;">🛒 Ingredientes</h4>
+                <h4 style="margin-bottom:10px;">Ingredientes</h4>
                 ${ings.map((ing, i) => `
                     <div class="check-item">
                         <input type="checkbox" id="ing-${i}">
@@ -78,7 +78,7 @@ function openRecipe(id) {
                 `).join('')}
             </div>
             <div>
-                <h4 style="margin-bottom:10px;">👨‍🍳 Pasos</h4>
+                <h4 style="margin-bottom:10px;">Pasos</h4>
                 ${steps.map((step, i) => `
                     <div class="check-item">
                         <input type="checkbox" id="step-${i}">
