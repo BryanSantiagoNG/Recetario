@@ -18,7 +18,6 @@ body {
     color: var(--dark);
 }
 
-/* Header y Navegación */
 header {
     background: var(--dark);
     color: var(--white);
@@ -48,7 +47,6 @@ nav ul li a:hover {
     color: var(--primary);
 }
 
-/* Secciones */
 section {
     padding: 40px 10%;
     min-height: 80vh;
@@ -63,7 +61,6 @@ section {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hero */
 .hero {
     text-align: center;
     padding: 100px 20px;
@@ -73,7 +70,6 @@ section {
     border-radius: 15px;
 }
 
-/* Grid de Recetas */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -95,7 +91,6 @@ section {
     border-radius: 8px;
 }
 
-/* Formularios */
 form {
     display: flex;
     flex-direction: column;
@@ -155,7 +150,25 @@ section { padding: 40px 5%; }
 .recipe-card h3 { padding: 10px; margin: 0; }
 
 .modal { position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; }
-.modal-content { background: white; width: 90%; max-width: 800px; height: 80vh; overflow-y: auto; border-radius: 15px; position: relative; padding: 30px; }
+.modal-content {
+    background: #ffffff; /* Asegura que el fondo sea blanco */
+    color: #333333;      /* Asegura que el texto sea oscuro */
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 20px;
+    text-align: left; /* Alinea el texto a la izquierda */
+}
 .close { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
 
 .check-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 5px; }
