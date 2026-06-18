@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefDigital | Mi Recetario Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>ChefDigital</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
+                <li><a href="#" onclick="showSection('recetas')">Mis Recetas</a></li>
+                <li><a href="#" onclick="showSection('nueva')">Añadir Receta</a></li>
+                <li><a href="#" onclick="showSection('contacto')">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content">
+        <!-- Sección Inicio -->
+        <section id="inicio" class="active">
+            <div class="hero">
+                <h2>Bienvenido a tu Cocina Virtual</h2>
+                <p>Organiza, guarda y descubre tus mejores platillos en un solo lugar.</p>
+                <button class="btn-main" onclick="showSection('recetas')">Ver Recetas</button>
+            </div>
+        </section>
+
+        <!-- Sección Mis Recetas -->
+        <section id="recetas" class="hidden">
+            <h2>Mis Recetas Guardadas</h2>
+            <div id="recipe-list" class="grid-container">
+                <!-- Las recetas se cargarán aquí con JS -->
+            </div>
+        </section>
+
+        <!-- Sección Añadir Receta -->
+        <section id="nueva" class="hidden">
+            <h2>Añadir Nueva Receta</h2>
+            <form id="recipe-form">
+                <input type="text" id="title" placeholder="Nombre del platillo" required>
+                <textarea id="ingredients" placeholder="Ingredientes (separados por coma)" required></textarea>
+                <input type="url" id="image" placeholder="URL de la imagen (ej: https://imagen.jpg)">
+                <button type="submit" class="btn-save">Guardar Receta</button>
+            </form>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contacto" class="hidden">
+            <h2>Contacto</h2>
+            <div class="contact-card">
+                <p>¿Tienes dudas o sugerencias? ¡Escríbenos!</p>
+                <input type="email" placeholder="Tu correo electrónico">
+                <textarea placeholder="Mensaje"></textarea>
+                <button class="btn-main">Enviar</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 ChefDigital - Proyecto Final Programación Web II</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
