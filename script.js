@@ -12,15 +12,15 @@ if (recipeForm) {
     recipeForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const ingredientsArray = document.getElementById('ingredients').value.split(',').map(i => i.trim()).filter(i => i !== "");
-        const procedureArray = document.getElementById('procedure').value.split(',').map(p => p.trim()).filter(p => p !== "");
+        const ingredientsArr = document.getElementById('ingredients').value.split(',').map(s => s.trim()).filter(s => s !== "");
+        const procedureArr = document.getElementById('procedure').value.split(',').map(s => s.trim()).filter(s => s !== "");
 
         const recipe = {
             id: Date.now(),
             title: document.getElementById('title').value,
-            ingredients: ingredientsArray,
-            procedure: procedureArray,
-            image: document.getElementById('image').value || 'https://via.placeholder.com/400?text=Sin+Imagen'
+            ingredients: ingredientsArr,
+            procedure: procedureArr,
+            image: document.getElementById('image').value || 'https://via.placeholder.com/400?text=Comida'
         };
 
         let recipes = JSON.parse(localStorage.getItem('myRecipes')) || [];
@@ -39,7 +39,7 @@ function loadRecipes() {
     recipeList.innerHTML = '';
 
     if (recipes.length === 0) {
-        recipeList.innerHTML = '<p>No hay recetas. ¡Añade la primera!</p>';
+        recipeList.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">No tienes recetas guardadas.</p>';
         return;
     }
 
@@ -48,11 +48,8 @@ function loadRecipes() {
         div.className = 'recipe-card';
         div.onclick = () => openRecipe(r.id);
         div.innerHTML = `
-            <img src="${r.image}" alt="${r.title}">
-            <div style="padding:15px;">
-                <h3 style="margin:0; color:#2c3e50;">${r.title}</h3>
-                <p style="font-size: 0.8rem; color: #e67e22; font-weight:bold; margin-top:5px;">Ver detalles →</p>
-            </div>
+            <img src="${r.image}">
+            <h3>${r.title}</h3>
         `;
         recipeList.appendChild(div);
     });
@@ -64,40 +61,33 @@ function openRecipe(id) {
 
     if (!r) return;
 
-    const ingHTML = r.ingredients.map((ing, i) => `
-        <div class="check-item">
-            <input type="checkbox" id="ing-${i}">
-            <label for="ing-${i}">${ing}</label>
-        </div>
-    `).join('');
-
-    const stepHTML = r.procedure.map((step, i) => `
-        <div class="check-item">
-            <input type="checkbox" id="step-${i}">
-            <label for="step-${i}"><strong>Paso ${i+1}:</strong> ${step}</label>
-        </div>
-    `).join('');
+    const ings = Array.isArray(r.ingredients) ? r.ingredients : [r.ingredients];
+    const steps = Array.isArray(r.procedure) ? r.procedure : [r.procedure];
 
     modalBody.innerHTML = `
-        <div style="text-align:center;">
-            <img src="${r.image}" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-        </div>
-        <h2 style="font-size:2.2rem; color:#2c3e50; margin: 20px 0;">${r.title}</h2>
-        
+        <img src="${r.image}" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
+        <h2 style="margin: 15px 0; color: var(--primary);">${r.title}</h2>
         <div class="modal-grid">
-            <div class="column">
-                <h3 style="color:#e67e22; border-bottom:2px solid #e67e22; padding-bottom:5px;">🛒 Ingredientes</h3>
-                <div style="margin-top:15px;">${ingHTML}</div>
+            <div>
+                <h4 style="margin-bottom:10px;">🛒 Ingredientes</h4>
+                ${ings.map((ing, i) => `
+                    <div class="check-item">
+                        <input type="checkbox" id="ing-${i}">
+                        <label for="ing-${i}">${ing}</label>
+                    </div>
+                `).join('')}
             </div>
-            <div class="column">
-                <h3 style="color:#e67e22; border-bottom:2px solid #e67e22; padding-bottom:5px;">👨‍🍳 Preparación</h3>
-                <div style="margin-top:15px;">${stepHTML}</div>
+            <div>
+                <h4 style="margin-bottom:10px;">👨‍🍳 Pasos</h4>
+                ${steps.map((step, i) => `
+                    <div class="check-item">
+                        <input type="checkbox" id="step-${i}">
+                        <label for="step-${i}"><strong>${i+1}.</strong> ${step}</label>
+                    </div>
+                `).join('')}
             </div>
         </div>
-        
-        <div style="margin-top:40px; border-top:1px solid #eee; padding-top:20px; text-align:right;">
-            <button onclick="deleteRecipe(${r.id})" style="background:#ff4757; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Eliminar Receta</button>
-        </div>
+        <button onclick="deleteRecipe(${r.id})" style="margin-top:20px; background:none; border:none; color:red; cursor:pointer; font-size:0.8rem;">Eliminar esta receta</button>
     `;
     modal.classList.remove('hidden');
 }
@@ -107,7 +97,7 @@ function closeRecipe() {
 }
 
 function deleteRecipe(id) {
-    if (confirm("¿Deseas eliminar esta receta?")) {
+    if (confirm("¿Borrar receta?")) {
         let recipes = JSON.parse(localStorage.getItem('myRecipes'));
         recipes = recipes.filter(r => r.id !== id);
         localStorage.setItem('myRecipes', JSON.stringify(recipes));
@@ -117,9 +107,7 @@ function deleteRecipe(id) {
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        closeRecipe();
-    }
+    if (event.target == modal) closeRecipe();
 }
 
 document.addEventListener('DOMContentLoaded', loadRecipes);

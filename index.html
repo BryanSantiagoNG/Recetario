@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChefDigital | Mi Recetario Interactivo</title>
+    <title>ChefDigital | Recetario Pro</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -20,11 +20,11 @@
         </nav>
     </header>
 
-    <main id="content">
-        <section id="inicio" class="active">
+    <main>
+        <section id="inicio">
             <div class="hero">
                 <h2>Tu cocina, bajo control</h2>
-                <p>Guarda tus recetas y marca tu progreso mientras cocinas.</p>
+                <p>Guarda tus recetas y marca tu progreso paso a paso.</p>
                 <button class="btn-main" onclick="showSection('recetas')">Empezar a Cocinar</button>
             </div>
         </section>
@@ -38,18 +38,10 @@
             <div class="form-container">
                 <h2>Nueva Receta</h2>
                 <form id="recipe-form">
-                    <label>Nombre del platillo</label>
-                    <input type="text" id="title" placeholder="Ej: Aguacate Relleno" required>
-                    
-                    <label>Ingredientes (separados por comas)</label>
-                    <textarea id="ingredients" placeholder="Ej: 2 aguacates, 1/2 cebolla, 1/4 taza de limón..." required></textarea>
-                    
-                    <label>Procedimiento (pasos separados por comas)</label>
-                    <textarea id="procedure" placeholder="Ej: Cortar los aguacates, Licuar el limón con chile, Mezclar todo..." required></textarea>
-                    
-                    <label>URL de la imagen</label>
-                    <input type="url" id="image" placeholder="https://imagen.com/foto.jpg">
-                    
+                    <input type="text" id="title" placeholder="Nombre: Ej. Aguacate Relleno" required>
+                    <textarea id="ingredients" placeholder="Ingredientes: Sal, Pimienta, Limón (separa por comas)" required></textarea>
+                    <textarea id="procedure" placeholder="Pasos: Cortar, Mezclar, Servir (separa por comas)" required></textarea>
+                    <input type="url" id="image" placeholder="URL de la imagen (Opcional)">
                     <button type="submit" class="btn-save">Guardar Receta</button>
                 </form>
             </div>
@@ -58,9 +50,8 @@
 
     <div id="recipe-modal" class="modal hidden">
         <div class="modal-content">
-            <span class="close" onclick="closeRecipe()">&times;</span>
-            <div id="modal-body">
-            </div>
+            <span class="close-btn" onclick="closeRecipe()">&times;</span>
+            <div id="modal-body"></div>
         </div>
     </div>
 
