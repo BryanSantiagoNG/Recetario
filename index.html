@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChefDigital | Recetario Pro</title>
+    <title>Recetario</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <div class="logo"><h1>Recetario Digital</h1></div>
-        <nav>
+        <div class="logo">
+            <h1>Recetario</h1>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="navbar">
             <ul>
                 <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
                 <li><a href="#" onclick="showSection('recetas')">Mis Recetas</a></li>
@@ -23,26 +26,52 @@
     <main>
         <section id="inicio">
             <div class="hero">
-                <h2>Tu cocina, bajo control</h2>
-                <p>Guarda tus recetas y marca tu progreso paso a paso.</p>
-                <button class="btn-main" onclick="showSection('recetas')">Empezar a Cocinar</button>
+                <h2>Tu cocina en cualquier lugar</h2>
+                <p>Guarda tus recetas, marca tu progreso y exporta tu contenido para llevarlo siempre contigo.</p>
+                <button class="btn-main" onclick="showSection('recetas')">Ver Mis Recetas</button>
             </div>
         </section>
 
         <section id="recetas" class="hidden">
-            <h2>Mis Recetas</h2>
-            <div id="recipe-list" class="grid-container"></div>
+            <div class="section-header">
+                <h2>Mis Recetas Guardadas</h2>
+                <div class="backup-controls">
+                    <button class="btn-alt" onclick="exportAllRecipes()" title="Descargar todas las recetas en un archivo">📤 Exportar Todo</button>
+                    <button class="btn-alt" onclick="document.getElementById('importFile').click()" title="Subir un archivo de recetas">📥 Importar</button>
+                    <input type="file" id="importFile" hidden onchange="importRecipes(event)" accept=".json">
+                </div>
+            </div>
+            
+            <div id="recipe-list" class="grid-container">
+                <p class="empty-msg">No tienes recetas guardadas aún. ¡Añade la primera!</p>
+            </div>
         </section>
 
         <section id="nueva" class="hidden">
             <div class="form-container">
-                <h2>Nueva Receta</h2>
+                <h2>Crear Nueva Receta</h2>
                 <form id="recipe-form">
-                    <input type="text" id="title" placeholder="Nombre: Ej. Aguacate Relleno" required>
-                    <textarea id="ingredients" placeholder="Ingredientes: Sal, Pimienta, Limón (separa por comas)" required></textarea>
-                    <textarea id="procedure" placeholder="Pasos: Cortar, Mezclar, Servir (separa por comas)" required></textarea>
-                    <input type="url" id="image" placeholder="URL de la imagen (Opcional)">
-                    <button type="submit" class="btn-save">Guardar Receta</button>
+                    <div class="input-group">
+                        <label for="title">Nombre del platillo:</label>
+                        <input type="text" id="title" placeholder="Ej: Tacos al Pastor" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ingredients">Ingredientes (separados por comas):</label>
+                        <textarea id="ingredients" placeholder="Ej: 2 aguacates, 1/2 cebolla, Limón, Sal..." required></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="procedure">Pasos de preparación (separados por comas):</label>
+                        <textarea id="procedure" placeholder="Ej: Cortar los ingredientes, Mezclar en un bowl, Servir frío..." required></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="image">URL de la imagen (opcional):</label>
+                        <input type="url" id="image" placeholder="https://ejemplo.com/imagen.jpg">
+                    </div>
+
+                    <button type="submit" class="btn-save">Guardar en mi Recetario</button>
                 </form>
             </div>
         </section>
@@ -51,9 +80,14 @@
     <div id="recipe-modal" class="modal hidden">
         <div class="modal-content">
             <span class="close-btn" onclick="closeRecipe()">&times;</span>
-            <div id="modal-body"></div>
+            <div id="modal-body">
+            </div>
         </div>
     </div>
+
+    <footer>
+        <p>&copy; 2026 Recetario - Proyecto Final Programación Web II</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
